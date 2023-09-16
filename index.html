@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx">
+      let register = document.getElementById("register");
+      let login = document.getElementById("login");
+      let x = 110;
+      let y = 0;
+      function log() {
+        document.documentElement.style.setProperty("--lf", y);
+        register.style.left = 450 + "px";
+        login.style.left = 35 + "px";
+      }
+      function reg() {
+        document.documentElement.style.setProperty("--lf", x + "px");
+        register.style.left = 35 + "px";
+        login.style.left = -400 + "px";
+      }
+    </script>
+  </body>
+</html>
