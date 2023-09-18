@@ -15,8 +15,16 @@ const App = () => {
   <Routes>
     <Route path='/register' element={<Register />}/>
     <Route path='/' element={<Login />}/>
+    {/* <Route path='/page' element={<Page/>}></Route> */}
     </Routes>
+   
   </BrowserRouter>
+  //  <Routes>
+    {/* <BrowserRouter>
+   <Route path='/page' element={<Page/>}></Route>
+ </Routes>
+ </BrowserRouter> */}
+  
 }
 
 export default App
