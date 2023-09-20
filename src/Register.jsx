@@ -1,58 +1,134 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { BrowserRouter, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const accounts = [
+    {
+      id: 0,
+      email: "youremail@gmail.com",
+      username: "yourname",
+      password: "yourpassword",
+    },
+  ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      formData.username !== "" &&
+      formData.email !== "" &&
+      formData.password !== ""
+    ) {
+      const newAccount = {
+        id: accounts.length,
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+      };
+
+      // Menambahkan akun baru ke array accounts
+      accounts.push(newAccount);
+
+      // Menyimpan array accounts di localStorage
+      localStorage.setItem("accounts", JSON.stringify(accounts));
+
+      alert("Registrasi berhasil!");
+      console.log(accounts);
+
+      navigate("/");
+
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+    } else {
+      alert("Harap isi semua kolom!");
+    }
+  };
+
   return (
-    <>
-  <div class="mainContainer">
-    <div class="box">
-      <div class="title-box" >
-       
-        <button class="login" to="/register">Register</button>
-        <Link class="register" to="/">Login</Link>
-      </div>
-      {/* <div class="icon">
-        <img src="./pics/fb.png" alt="" />
-        <img src="./pics/gp.png" alt="" />
-        <img src="./pics/tw.png" alt="" />
-      </div> */}
-<br />
-<br />
-      <div class="input-field" id="login">
-        <input type="text" class="input-text" placeholder="Email" />
-        <input class="input-text" type="text" placeholder="Username " />
-        <input
-          class="input-text"
-          type="password"
-          placeholder="pasword"
-        />
-        <input type="checkbox" id="log-checkbox" />
-        <label for="log-checkbox">Remember Password</label>
-        <input type="text" class="input-text" />
-        <button>Register</button>
-      </div>
-
-      <div class="input-field" id="register">
-        <input class="input-text" type="text" placeholder="User ID" />
-        <input class="input-text" type="text" placeholder="Email ID" />
-
-        <input
-          class="input-text"
-          type="password"
-          placeholder="Enter password"
-        />
-        <input type="checkbox" id="regi-checkbox" />
-        <label for="regi-checkbox">I agree to the term & conditions</label>
-        <button>Register</button>
-        
+    <div className="mainContainer">
+      <div className="box">
+        <div className="title-box">
+          <button className="login" to="/register">
+            Register
+          </button>
+        </div>
+        <br />
+        <br />
+        <div className="input-field" id="login">
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              className="input-text"
+              placeholder="Email"
+              id="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+            <input
+              className="input-text"
+              type="text"
+              placeholder="Username"
+              id="username"
+              value={formData.username}
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+            />
+            <input
+              className="input-text"
+              type="password"
+              placeholder="Password"
+              id="password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+            <br />
+            <div id="r">
+              <center>
+                <button type="submit" id="r" className="r">
+                  Register
+                </button>
+              </center>
+            </div>
+          </form>
+          <br />
+          <center>
+            <div>
+              <div>
+                Sudah punya akun?
+                <div></div>
+                <Link id="p" className="register" to="/">
+                  Log In
+                </Link>
+              </div>
+            </div>
+          </center>
+        </div>
       </div>
     </div>
-  </div>;
-  </>
-  )
+  );
 };
 
 export default Register;
+

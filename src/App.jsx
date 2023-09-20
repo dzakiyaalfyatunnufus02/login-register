@@ -1,30 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './login.css'
-import { Route, BrowserRouter,Routes} from 'react-router-dom'
-import Register from './Register'
-import Login from './login'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 
+import "./Login.css";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Register from "./Register";
+import Login from "./login";
+import Home from "./home";
 
 
 
 
 const App = () => {
-  return <BrowserRouter>
-  <Routes>
-    <Route path='/register' element={<Register />}/>
-    <Route path='/' element={<Login />}/>
-    {/* <Route path='/page' element={<Page/>}></Route> */}
-    </Routes>
-   
-  </BrowserRouter>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+         
+        {/* <Route path='/home' element={<Home />}/> */}
+        {/* <Route path='/page' element={<Page/>}></Route> */}
+      </Routes>
+    </BrowserRouter>
+  );
   //  <Routes>
-    {/* <BrowserRouter>
+  {
+    /* <BrowserRouter>
    <Route path='/page' element={<Page/>}></Route>
  </Routes>
- </BrowserRouter> */}
-  
-}
+ </BrowserRouter> */
+  }
+};
 
-export default App
+export default App;
