@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,18 +30,46 @@ const Login = () => {
           account.password === formData.password
       );
 
+      
+
+
       if (existingAccount) {
-        alert("Login berhasil!");
+        // alert("Login berhasil!");
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'login berhasil',
+
+          showConfirmButton: false,
+          timer: 2500
+        })
+        localStorage.setItem("UserName", formData.username)
         console.log(storedAccounts);
         navigate("/Home");
       } else {
-        alert("Username atau password salah!");
+        // alert("Username atau password salah!");
+        Swal.fire({
+          position: 'top-center',
+          icon: 'error',
+          title: 'user name atau pasword salah',
+          showConfirmButton: false,
+          timer: 2500
+        })
       }
     } else {
-      alert("Harap isi semua kolom!");
+      // alert("Harap isi semua kolom!");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'info',
+        title: 'harap isi semua kolom',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }
   };
 
+
+   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -68,7 +97,7 @@ const Login = () => {
             <input
               className="input-text"
               type="text"
-              placeholder="User ID"
+              placeholder="User Name"
               name="username"
               value={formData.username}
               onChange={handleChange}
@@ -76,7 +105,7 @@ const Login = () => {
             <input
               className="input-text"
               type="password"
-              placeholder="Enter password"
+              placeholder="password"
               name="password"
               value={formData.password}
               onChange={handleChange}

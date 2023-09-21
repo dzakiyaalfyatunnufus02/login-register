@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +34,19 @@ const Register = () => {
       formData.email !== "" &&
       formData.password !== ""
     ) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(formData.email)) {
+        Swal.fire({
+          position: 'top-center',
+          icon: 'info',
+      title: 'email tidak valid. Harap isi dengan benar!',
+          showConfirmButton: false,
+          timer: 2500
+        })
+        return;
+      }
+
       const newAccount = {
         id: accounts.length,
         email: formData.email,
@@ -46,7 +60,14 @@ const Register = () => {
       // Menyimpan array accounts di localStorage
       localStorage.setItem("accounts", JSON.stringify(accounts));
 
-      alert("Registrasi berhasil!");
+      // alert("Registrasi berhasil!");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Register Berhasil',
+        showConfirmButton: false,
+        timer: 3500
+      })
       console.log(accounts);
 
       navigate("/");
@@ -57,7 +78,14 @@ const Register = () => {
         password: "",
       });
     } else {
-      alert("Harap isi semua kolom!");
+      // alert("Harap isi semua kolom!");
+      Swal.fire({
+        position: 'top-center',
+        icon: 'info',
+        title: 'harap isi semua kolom',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }
   };
 
@@ -79,9 +107,9 @@ const Register = () => {
               placeholder="Email"
               id="email"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
+              onChange={handleChange
               }
+              name="email"
             />
             <input
               className="input-text"
@@ -89,24 +117,26 @@ const Register = () => {
               placeholder="Username"
               id="username"
               value={formData.username}
-              onChange={(e) =>
-                setFormData({ ...formData, username: e.target.value })
+              onChange={handleChange
+            
               }
+              name="username"
             />
+            
             <input
               className="input-text"
               type="password"
               placeholder="Password"
               id="password"
               value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+              onChange={handleChange
               }
+              name="password"
             />
             <br />
             <div id="r">
               <center>
-                <button type="submit" id="r" className="r">
+                <button type="submit" id="r" className="btn btn-color px-5 mb-5 w100">
                   Register
                 </button>
               </center>
@@ -115,7 +145,7 @@ const Register = () => {
           <br />
           <center>
             <div>
-              <div>
+              <div className="text-center mb-5 text-dark">
                 Sudah punya akun?
                 <div></div>
                 <Link id="p" className="register" to="/">

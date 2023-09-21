@@ -7,9 +7,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Register from "./Register";
 import Login from "./login";
 import Home from "./home";
-
-
-
+import PrivateRoute from "./routes/PrivatRoute";
 
 const App = () => {
   return (
@@ -17,8 +15,15 @@ const App = () => {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-         
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+
         {/* <Route path='/home' element={<Home />}/> */}
         {/* <Route path='/page' element={<Page/>}></Route> */}
       </Routes>

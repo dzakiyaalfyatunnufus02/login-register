@@ -29,13 +29,13 @@
     border-radius: 10px;
     box-shadow: 5px 5px 18px #38383890;
     overflow: hidden;
-    gap: 100px;
+    /* gap: 100px; */
     
   }
 
   
   .title-box {
-    padding: 20px;
+    /* padding: 20px; */
     display: flex;
     position: relative;
     justify-content: center;
