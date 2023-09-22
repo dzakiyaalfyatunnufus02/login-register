@@ -7,6 +7,7 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
+    role : "supervisor",
   });
   const navigate = useNavigate();
   const accounts = [
@@ -15,6 +16,7 @@ const Register = () => {
       email: "youremail@gmail.com",
       username: "yourname",
       password: "yourpassword",
+      role : "supervisor",
     },
   ];
 
@@ -42,7 +44,7 @@ const Register = () => {
           icon: 'info',
       title: 'email tidak valid. Harap isi dengan benar!',
           showConfirmButton: false,
-          timer: 2500
+          timer: 1500
         })
         return;
       }
@@ -52,6 +54,8 @@ const Register = () => {
         email: formData.email,
         username: formData.username,
         password: formData.password,
+        role : formData.role,
+
       };
 
       // Menambahkan akun baru ke array accounts
@@ -66,7 +70,7 @@ const Register = () => {
         icon: 'success',
         title: 'Register Berhasil',
         showConfirmButton: false,
-        timer: 3500
+        timer: 2500
       })
       console.log(accounts);
 
@@ -76,6 +80,7 @@ const Register = () => {
         username: "",
         email: "",
         password: "",
+        role : "supervisor",
       });
     } else {
       // alert("Harap isi semua kolom!");
@@ -84,13 +89,14 @@ const Register = () => {
         icon: 'info',
         title: 'harap isi semua kolom',
         showConfirmButton: false,
-        timer: 2500
+        timer: 1500
       })
     }
   };
 
   return (
-    <div className="mainContainer">
+   <div className="body">
+     <div className="mainContainer">
       <div className="box">
         <div className="title-box">
           <button className="login" to="/register">
@@ -133,6 +139,12 @@ const Register = () => {
               }
               name="password"
             />
+            <label htmlFor="role">Role:</label>
+            <select name="role" id="role" value={formData.role} onChange={handleChange}>
+              <option value="supervisor">Supervisor</option>
+              <option value="operator">Operator</option>
+            </select>
+            <br />
             <br />
             <div id="r">
               <center>
@@ -157,6 +169,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

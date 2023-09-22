@@ -15,6 +15,7 @@ const Login = () => {
       id: 0,
       username: "yourname",
       password: "k",
+      role: "supervisor",
     },
   ]);
 
@@ -30,46 +31,40 @@ const Login = () => {
           account.password === formData.password
       );
 
-      
-
-
       if (existingAccount) {
         // alert("Login berhasil!");
         Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'login berhasil',
-
+          position: "top-center",
+          icon: "success",
+          title: "login berhasil",
           showConfirmButton: false,
-          timer: 2500
-        })
-        localStorage.setItem("UserName", formData.username)
-        console.log(storedAccounts);
+          timer: 1500,
+        });
+        localStorage.setItem("UserRole", existingAccount.role);
+        // console.log(storedAccounts);
         navigate("/Home");
       } else {
         // alert("Username atau password salah!");
         Swal.fire({
-          position: 'top-center',
-          icon: 'error',
-          title: 'user name atau pasword salah',
+          position: "top-center",
+          icon: "error",
+          title: "user name atau pasword salah",
           showConfirmButton: false,
-          timer: 2500
-        })
+          timer: 1500,
+        });
       }
     } else {
       // alert("Harap isi semua kolom!");
       Swal.fire({
-        position: 'top-center',
-        icon: 'info',
-        title: 'harap isi semua kolom',
+        position: "top-center",
+        icon: "info",
+        title: "harap isi semua kolom",
         showConfirmButton: false,
-        timer: 2500
-      })
+        timer: 1500,
+      });
     }
   };
 
-
-   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -79,66 +74,68 @@ const Login = () => {
   };
 
   return (
-    <div className="mainContainer">
-      <div className="box">
-        <div className="title-box">
-          <button className="register">Log in</button>
-        </div>
-        <br />
-        <br />
+    <div className="body">
+      <div className="mainContainer">
+        <div className="box">
+          <div className="title-box">
+            <button className="register">Log in</button>
+          </div>
+          <br />
+          <br />
 
-        <div>
-          <form
-            action=""
-            onSubmit={handleSubmit}
-            className="input-field"
-            id="login"
-          >
-            <input
-              className="input-text"
-              type="text"
-              placeholder="User Name"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            <input
-              className="input-text"
-              type="password"
-              placeholder="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+          <div>
+            <form
+              action=""
+              onSubmit={handleSubmit}
+              className="input-field"
+              id="login"
+            >
+              <input
+                className="input-text"
+                type="text"
+                placeholder="User Name"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+              />
+              <input
+                className="input-text"
+                type="password"
+                placeholder="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
 
-            <input type="checkbox" id="log-checkbox" />
-            <label htmlFor="log-checkbox">Remember Password</label>
-            <div id="r">
-              <center>
-                <button type="submit" id="r" className="r">
-                  Log In
-                </button>
-              </center>
-            </div>
-          </form>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <center>
-            <div className="p">
-              Not a member? <div></div>
-              <Link id="p" className="register" to="/register">
-                Sign Up
-              </Link>
-            </div>
-          </center>
+              <input type="checkbox" id="log-checkbox" />
+              <label htmlFor="log-checkbox">Remember Password</label>
+              <div id="r">
+                <center>
+                  <button type="submit" id="r" className="r">
+                    Log In
+                  </button>
+                </center>
+              </div>
+            </form>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <center>
+              <div className="p">
+                Not a member? <div></div>
+                <Link id="p" className="register" to="/register">
+                  Sign Up
+                </Link>
+              </div>
+            </center>
+          </div>
         </div>
       </div>
     </div>

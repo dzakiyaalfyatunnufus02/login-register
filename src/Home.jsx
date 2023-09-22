@@ -1,62 +1,72 @@
-// import React from "react";
-// import "../src/Home.css";
-import Swal from "sweetalert2";
 import React from "react";
-import "./Home.css"; // Import your custom CSS file for styling
+import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Home = () => {
-  
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Tambahkan useNavigate
+  const userRole = localStorage.getItem("UserRole");
+
   const handleLogout = () => {
-    // Hapus data autentikasi dari localStorage atau sesuai dengan kebutuhan aplikasi Anda
     localStorage.clear();
     navigate("/");
-    
 
-    // Tampilkan pesan sukses atau tindakan lainnya
     Swal.fire({
-      position: 'top-center',
-      icon: 'success',
-      title: 'Logout berhasil',
+      position: "top-middle",
+      icon: "success",
+      title: "LOGOUT Berhasil!!",
       showConfirmButton: false,
-      timer: 2500
+      timer: 2500,
     });
   };
+
   return (
-    <div className="home-container">
-      <header className="header">
-        <h1>Welcome to My Aesthetic Home</h1>
-      </header>
+    <div>
+      <Navbar bg="light" expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="#home">Sewa ruang</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link href="#link">Link</Nav.Link>
+              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Nav>
+              <button onClick={handleLogout} className="btn btn-danger">
+                LOGOUT
+              </button>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      <main className="main-content">
-        <section className="featured-section">
-          <div className="featured-image">
-            {/* Add your featured image here */}
-            <img src="your-image-url.jpg" alt="Featured" />
-          </div>
-          <div className="featured-text">
-            <h2>Explore the Beauty</h2>
-            <p>Discover the world of aesthetics.</p>
-            <button className="explore-button">Explore</button>
-          </div>
-        </section>
-
-        <section className="content-section">
-          <h2>Featured Content</h2>
-          {/* Add your featured content here */}
-        </section>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
-      </main>
-
-      <footer className="footer">
-        <p>&copy; 2023 My Aesthetic Home</p>
-      </footer>
+      <div className="home">
+        {userRole === "supervisor" ? (
+          <h1>WELCOME SUPERVISOR</h1>
+        ) : (
+          <h1> WELCOME OPERATOR</h1>
+        )}
+      </div>
     </div>
   );
 };
-
-
-
 
 export default Home;
